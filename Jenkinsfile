@@ -1,8 +1,8 @@
 pipeline {
   agent any
     tools {
-      maven 'maven3'
-                 jdk 'JDK8'
+      maven 'MAVEN 3.8.4'
+                 jdk 'jdk-11.0.13.8-hotspot'
     }
     stages {      
         stage('Build maven') {
@@ -15,14 +15,14 @@ pipeline {
         stage('Copy Artifact') {
            steps { 
                    sh 'pwd'
-		   sh 'cp -r target/*.jar docker'
+		   sh 'cp -r target/*.jar dockerf'
            }
         }
         stage('Build docker image') {
            steps {
                script {         
-                 def customImage = docker.build('annus26/testproj', "./docker")
-                 docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                 def customImage = docker.build('annus26/springBootMSEKSDemo', "./dockerf")
+                 docker.withRegistry('https://registry.hub.docker.com', 'dockerhubcred') {
                  customImage.push("${env.BUILD_NUMBER}")
               }                     
            }
