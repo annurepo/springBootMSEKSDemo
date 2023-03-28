@@ -2,7 +2,7 @@ pipeline {
   agent any
     tools {
       maven 'MAVEN 3.8.4'
-                 jdk 'jdk-11.0.13.8-hotspot'
+      jdk 'jdk-11.0.13.8-hotspot'
     }
     stages {      
         stage('Build maven') {
@@ -14,8 +14,8 @@ pipeline {
         
         stage('Copy Artifact') {
            steps { 
-                   sh 'pwd'
-		   sh 'cp -r target/*.jar dockerf'
+           sh 'pwd'
+		   sh 'cp -r ./target/*.jar ./dockerf'
            }
         }
         stage('Build docker image') {
